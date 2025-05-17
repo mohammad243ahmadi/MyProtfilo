@@ -10,9 +10,9 @@ const projects = [
     description: 'A modern, responsive website for an upscale Italian restaurant built with React and styled-components..',
     technologies: ['React', "javaScript","paralix"],
     github: 'https://github.com/mohammad243ahmadi/ItalianRestaurant',
-    live: 'https://italian-restaurant-pied.vercel.app/',
+    live: 'https://italian-restaurant-mu.vercel.app/',
     image: 'https://images.unsplash.com/photo-1554679665-f5537f187268?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-  },,
+  }
 ];
 
 const Projects = () => {
