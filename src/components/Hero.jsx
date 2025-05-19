@@ -1,116 +1,271 @@
-import React from 'react';
-import { Box, Typography, Button, Container } from '@mui/material';
-import { motion } from 'framer-motion';
-import { Parallax } from 'react-parallax';
+import React from "react";
+import { Box, Typography, Button, Container } from "@mui/material";
+import { motion } from "framer-motion";
+import { Parallax } from "react-parallax";
+import { useTheme as useCustomTheme } from "../context/ThemeContext";
+import { Link } from "react-scroll";
+import ScrollAnimation from "./common/ScrollAnimation";
 
 // Hero component with parallax background
 const Hero = () => {
+  const { currentTheme } = useCustomTheme();
+
   // Placeholder hero image URL (replace with your preferred image)
-  const heroImageUrl = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
+  const heroImageUrl =
+    "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80";
+
+  // Derive RGB values for the theme color
+  const primaryRGB = {
+    r: parseInt(currentTheme.primary.slice(1, 3), 16),
+    g: parseInt(currentTheme.primary.slice(3, 5), 16),
+    b: parseInt(currentTheme.primary.slice(5, 7), 16),
+  };
+
+  // Animation variants for the typing effect
+  const typingVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
+
+  const letterVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", damping: 12 },
+    },
+  };
+
+  const title = "Hi, I'm M.Hussain Ahmadi";
 
   return (
-    <Parallax
-      bgImage={heroImageUrl}
-      strength={500}
-      blur={{ min: -5, max: 15 }}
-    >
+    <Parallax bgImage={heroImageUrl} strength={500} blur={{ min: -5, max: 15 }}>
       <Box
         id="hero"
         sx={{
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          position: 'relative',
-          '&::before': {
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          position: "relative",
+          "&::before": {
             content: '""',
-            position: 'absolute',
+            position: "absolute",
             top: 0,
             left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(10, 25, 47, 0.85)',
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(10, 25, 47, 0.85)",
             zIndex: 1,
           },
         }}
       >
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Typography
-              variant="h6"
-              sx={{
-                color: 'primary.main',
-                mb: 2,
-                fontFamily: 'monospace',
-              }}
-            >
-              Hi, my name is
-            </Typography>
-            <Typography
-              variant="h1"
-              sx={{
-                color: 'text.primary',
-                fontWeight: 'bold',
-                mb: 2,
-                fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
-              }}
-            >
-              M.Hussain Ahmadi
-            </Typography>
-            <Typography
-              variant="h2"
-              sx={{
-                color: 'text.secondary',
-                mb: 4,
-                fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' },
-              }}
-            >
-              I build things for the web.
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                color: 'text.secondary',
-                maxWidth: '600px',
-                mb: 5,
-              }}
-            >
-              I'm a Python and web developer specializing in building exceptional digital experiences.
-              Currently, I'm focused on building responsive web applications and backend services
-              that solve real-world problems.
-            </Typography>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button
-                variant="outlined"
-                size="large"
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
+          <Box sx={{ maxWidth: "800px" }}>
+            <ScrollAnimation animation="slideUp" delay={0.2}>
+              <Typography
+                variant="overline"
                 sx={{
-                  color: 'primary.main',
-                  borderColor: 'primary.main',
-                  borderRadius: '4px',
-                  px: 4,
-                  py: 1.5,
-                  '&:hover': {
-                    borderColor: 'primary.light',
-                    backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                  },
+                  color: currentTheme.primary,
+                  fontWeight: 500,
+                  letterSpacing: "2px",
+                  display: "block",
+                  mb: 2,
                 }}
-                href="#contact"
               >
-                Get In Touch
-              </Button>
+                Python Developer & Educator
+              </Typography>
+            </ScrollAnimation>
+
+            <motion.div
+              variants={typingVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <Typography
+                variant="h1"
+                sx={{
+                  color: "text.primary",
+                  fontWeight: 700,
+                  fontSize: { xs: "2.5rem", md: "3.5rem" },
+                  mb: 3,
+                  lineHeight: 1.1,
+                  display: "flex",
+                  flexWrap: "wrap",
+                }}
+              >
+                {title.split("").map((char, index) => (
+                  <motion.span
+                    key={index}
+                    variants={letterVariants}
+                    style={{ display: "inline-block", whiteSpace: "pre" }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </Typography>
             </motion.div>
-          </motion.div>
+
+            <ScrollAnimation animation="slideUp" delay={0.4}>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "text.secondary",
+                  mb: 5,
+                  fontSize: { xs: "1rem", md: "1.1rem" },
+                  maxWidth: "600px",
+                }}
+              >
+                A passionate Python developer and educator with expertise in web
+                development, machine learning, and data analysis. I create
+                innovative solutions and help students master programming
+                skills.
+              </Typography>
+            </ScrollAnimation>
+
+            <ScrollAnimation animation="slideUp" delay={0.6}>
+              <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link to="contact" smooth={true} duration={800} offset={-70}>
+                    <Button
+                      variant="contained"
+                      disableElevation
+                      sx={{
+                        bgcolor: currentTheme.primary,
+                        px: 4,
+                        py: 1.5,
+                        borderRadius: "30px",
+                        color: "#0A192F",
+                        fontWeight: 600,
+                        position: "relative",
+                        overflow: "hidden",
+                        "&::after": {
+                          content: '""',
+                          position: "absolute",
+                          top: 0,
+                          left: "-100%",
+                          width: "200%",
+                          height: "100%",
+                          background: `linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)`,
+                          transition: "all 0.5s ease",
+                        },
+                        "&:hover": {
+                          bgcolor: currentTheme.primary,
+                          transform: "translateY(-3px)",
+                          boxShadow: `0 4px 20px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.5)`,
+                          "&::after": {
+                            left: "100%",
+                          },
+                        },
+                      }}
+                    >
+                      Contact Me
+                    </Button>
+                  </Link>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link to="projects" smooth={true} duration={800} offset={-70}>
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        borderColor: currentTheme.primary,
+                        color: currentTheme.primary,
+                        px: 4,
+                        py: 1.5,
+                        borderRadius: "30px",
+                        borderWidth: 2,
+                        fontWeight: 600,
+                        position: "relative",
+                        overflow: "hidden",
+                        transition: "all 0.3s ease",
+                        "&::before": {
+                          content: '""',
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          background: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0)`,
+                          transition: "all 0.3s ease",
+                          zIndex: -1,
+                        },
+                        "&:hover": {
+                          borderColor: currentTheme.primary,
+                          color: "#0A192F",
+                          "&::before": {
+                            background: currentTheme.primary,
+                          },
+                        },
+                      }}
+                    >
+                      View Projects
+                    </Button>
+                  </Link>
+                </motion.div>
+              </Box>
+            </ScrollAnimation>
+
+            <ScrollAnimation animation="fade" delay={1.2}>
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 2,
+                  ease: "easeInOut",
+                }}
+                style={{
+                  position: "absolute",
+                  bottom: 40,
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: "30px",
+                    height: "50px",
+                    border: `2px solid ${currentTheme.primary}`,
+                    borderRadius: "20px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "flex-start",
+                    padding: "8px 0",
+                  }}
+                >
+                  <motion.div
+                    animate={{ y: [0, 12, 0] }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 1.5,
+                      ease: "easeInOut",
+                    }}
+                    style={{
+                      width: "6px",
+                      height: "6px",
+                      borderRadius: "50%",
+                      backgroundColor: currentTheme.primary,
+                    }}
+                  />
+                </Box>
+              </motion.div>
+            </ScrollAnimation>
+          </Box>
         </Container>
       </Box>
     </Parallax>
   );
 };
 
-export default Hero; 
+export default Hero;

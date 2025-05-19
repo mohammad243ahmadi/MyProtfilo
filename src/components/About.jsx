@@ -2,31 +2,61 @@ import React from 'react';
 import { Box, Typography, Grid, Container, Avatar } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Parallax } from 'react-parallax';
+import { useTheme as useCustomTheme } from '../context/ThemeContext';
+import ScrollAnimation from './common/ScrollAnimation';
 
 const About = () => {
-  // Placeholder about section image (replace with preferred image)
+  const { currentTheme } = useCustomTheme();
+  
+  // Placeholder about section image
   const aboutImageUrl = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
   
-  // Animation variants for staggered animations
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  // Derive RGB values for the theme color
+  const primaryRGB = {
+    r: parseInt(currentTheme.primary.slice(1, 3), 16),
+    g: parseInt(currentTheme.primary.slice(3, 5), 16),
+    b: parseInt(currentTheme.primary.slice(5, 7), 16)
+  };
+  
+  // Title line animation
+  const lineVariants = {
+    hidden: { width: 0 },
     visible: { 
-      opacity: 1,
+      width: '60px',
       transition: { 
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      } 
+        duration: 0.8,
+        ease: "easeOut",
+        delay: 0.3
+      }
     }
   };
   
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+  // Avatar animation
+  const avatarVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
     visible: { 
-      y: 0, 
+      scale: 1, 
       opacity: 1,
-      transition: { duration: 0.5 }
+      transition: { 
+        type: "spring", 
+        stiffness: 100, 
+        damping: 15,
+        delay: 0.2
+      }
     }
   };
+  
+  // Technologies
+  const technologies = [
+    'Python',
+    'React.js',
+    'JavaScript',
+    'Node.js',
+    'PostgreSQL',
+    'Data Analysis',
+    'Machine Learning',
+    'Web Development'
+  ];
 
   return (
     <Parallax
@@ -56,101 +86,122 @@ const About = () => {
         }}
       >
         <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <motion.div variants={itemVariants}>
-              <Typography
-                variant="h3"
-                sx={{
-                  color: 'text.primary',
-                  mb: 5,
-                  display: 'inline-block',
-                  position: 'relative',
-                  '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    bottom: '-10px',
-                    left: 0,
-                    width: '60px',
-                    height: '4px',
-                    backgroundColor: 'primary.main',
-                  },
+          <ScrollAnimation animation="slideUp" threshold={0.1}>
+            <Typography
+              variant="h3"
+              sx={{
+                color: 'text.primary',
+                mb: 1,
+                display: 'inline-block',
+                position: 'relative',
+              }}
+            >
+              About Me
+              <motion.div
+                variants={lineVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                style={{
+                  position: 'absolute',
+                  bottom: '-10px',
+                  left: 0,
+                  height: '4px',
+                  backgroundColor: currentTheme.primary,
+                  borderRadius: '2px',
                 }}
-              >
-                About Me
-              </Typography>
-            </motion.div>
+              />
+            </Typography>
+          </ScrollAnimation>
 
-            <Grid container spacing={6} alignItems="center">
-              <Grid item xs={12} md={6}>
-                <motion.div variants={itemVariants}>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: 'text.secondary',
-                      mb: 3,
-                    }}
-                  >
-                    Hello! I'm M.Hussain Ahmadi, a passionate Python and web developer with a strong
-                    foundation in building modern web applications. My journey in programming started
-                    with Python, and I've since expanded my skills to include full-stack web development.
-                    then I started teaching programming languages like python in Safir educational center.
-                  </Typography>
-                </motion.div>
-
-                <motion.div variants={itemVariants}>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: 'text.secondary',
-                      mb: 3,
-                    }}
-                  >
-                    I enjoy creating efficient, scalable, and user-friendly applications that solve
-                    real-world problems. My approach combines clean code practices with modern
-                    development methodologies to deliver high-quality solutions.
-                  </Typography>
-                </motion.div>
-
-                <motion.div variants={itemVariants}>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: 'text.primary',
-                      fontWeight: 500,
-                      mb: 2,
-                    }}
-                  >
-                    Here are a few technologies I've been working with recently:
-                  </Typography>
-                </motion.div>
-
+          <Grid container spacing={6} alignItems="center" sx={{ mt: 3 }}>
+            <Grid item xs={12} md={6}>
+              <ScrollAnimation animation="slideRight" delay={0.2} threshold={0.1}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: 'text.secondary',
+                    mb: 3,
+                    lineHeight: 1.8,
+                  }}
+                >
+                  Hello! I'm M.Hussain Ahmadi, a passionate Python and web developer with a strong
+                  foundation in building modern web applications. My journey in programming started
+                  with Python, and I've since expanded my skills to include full-stack web development.
+                </Typography>
+              </ScrollAnimation>
+              
+              <ScrollAnimation animation="slideRight" delay={0.3} threshold={0.1}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: 'text.secondary',
+                    mb: 3,
+                    lineHeight: 1.8,
+                  }}
+                >
+                  I've been teaching programming languages like Python at Safir Educational Center,
+                  where I help students develop their coding skills and understand complex programming
+                  concepts through practical projects and hands-on exercises.
+                </Typography>
+              </ScrollAnimation>
+              
+              <ScrollAnimation animation="slideRight" delay={0.4} threshold={0.1}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: 'text.secondary',
+                    mb: 4,
+                    lineHeight: 1.8,
+                  }}
+                >
+                  My approach to both development and teaching focuses on creating clean, efficient,
+                  and maintainable code. I'm constantly learning new technologies and methodologies to
+                  improve my skills and stay current in this rapidly evolving field.
+                </Typography>
+              </ScrollAnimation>
+              
+              <ScrollAnimation animation="slideUp" delay={0.5} threshold={0.1}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: 'text.primary',
+                    mb: 2,
+                    fontWeight: 500,
+                  }}
+                >
+                  Technologies I work with:
+                </Typography>
+                
                 <Grid container spacing={2}>
-                  {[
-                    'Python',
-                    'React.js',
-                    'JavaScript',
-                    'Node.js',
-                    'PostgreSQL',
-                  ].map((tech) => (
+                  {technologies.map((tech, index) => (
                     <Grid item xs={6} sm={4} key={tech}>
-                      <motion.div variants={itemVariants}>
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 * index, duration: 0.5 }}
+                        viewport={{ once: true }}
+                      >
                         <Typography
                           variant="body2"
                           sx={{
-                            color: 'primary.main',
+                            color: currentTheme.primary,
                             display: 'flex',
                             alignItems: 'center',
+                            transition: 'all 0.2s ease',
                             '&::before': {
                               content: '"▹"',
-                              color: 'primary.main',
+                              color: currentTheme.primary,
                               mr: 1,
                               fontSize: '1.2rem',
+                              transition: 'all 0.2s ease',
                             },
+                            '&:hover': {
+                              transform: 'translateX(5px)',
+                              '&::before': {
+                                transform: 'scale(1.2)',
+                              }
+                            }
                           }}
                         >
                           {tech}
@@ -159,50 +210,66 @@ const About = () => {
                     </Grid>
                   ))}
                 </Grid>
-              </Grid>
-
-              <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center' }}>
-                <motion.div 
-                  variants={itemVariants}
+              </ScrollAnimation>
+            </Grid>
+            
+            <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center' }}>
+              <ScrollAnimation animation="scale" threshold={0.1}>
+                <motion.div
+                  variants={avatarVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
                   whileHover={{ scale: 1.05 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <Box
                     sx={{
                       position: 'relative',
-                      width: { xs: '250px', sm: '300px', md: '350px' },
-                      height: { xs: '250px', sm: '300px', md: '350px' },
-                      borderRadius: '10px',
-                      overflow: 'hidden',
-                      boxShadow: '0px 0px 20px rgba(0, 0, 0, 0.2)',
+                      maxWidth: '350px',
                       '&::before': {
                         content: '""',
                         position: 'absolute',
-                        top: '15px',
-                        left: '15px',
+                        top: 20,
+                        left: 20,
                         width: '100%',
                         height: '100%',
-                        border: '2px solid',
-                        borderColor: 'primary.main',
-                        borderRadius: '10px',
-                        zIndex: -1,
+                        border: `2px solid ${currentTheme.primary}`,
+                        borderRadius: 2,
+                        zIndex: 1,
+                        transition: 'all 0.3s ease',
                       },
+                      '&:hover::before': {
+                        top: 10,
+                        left: 10,
+                      }
                     }}
                   >
                     <Avatar
-                      src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cHJvZ3JhbW1lcnxlbnwwfHwwfHx8MA%3D%3D"
+                      src="https://via.placeholder.com/350"
                       alt="M.Hussain Ahmadi"
+                      variant="rounded"
                       sx={{
                         width: '100%',
-                        height: '100%',
-                        borderRadius: '10px',
+                        height: 'auto',
+                        aspectRatio: '1/1',
+                        borderRadius: 2,
+                        position: 'relative',
+                        zIndex: 2,
+                        border: `4px solid ${currentTheme.primary}`,
+                        boxShadow: `0 10px 30px -10px rgba(0, 0, 0, 0.3)`,
+                        filter: 'grayscale(40%)',
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          filter: 'grayscale(0%)',
+                        }
                       }}
                     />
                   </Box>
                 </motion.div>
-              </Grid>
+              </ScrollAnimation>
             </Grid>
-          </motion.div>
+          </Grid>
         </Container>
       </Box>
     </Parallax>

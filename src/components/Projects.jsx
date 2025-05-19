@@ -1,42 +1,90 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Grid, Paper, Button, Container, Chip, Stack } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Parallax } from 'react-parallax';
+import { useTheme as useCustomTheme } from '../context/ThemeContext';
+import ScrollAnimation from './common/ScrollAnimation';
 
 // Enhanced project data with images
 const projects = [
   {
     title: 'Fresco Italian Restaurant',
-    description: 'A modern, responsive website for an upscale Italian restaurant built with React and styled-components..',
-    technologies: ['React', "javaScript","paralix"],
+    description: 'A modern, responsive website for an upscale Italian restaurant built with React and styled-components.',
+    technologies: ['React', "JavaScript","paralix"],
     github: 'https://github.com/mohammad243ahmadi/ItalianRestaurant',
-    live: 'https://italian-restaurant-mu.vercel.app/',
+    live: 'https://italian-restaurant-pied.vercel.app/',
     image: 'https://images.unsplash.com/photo-1554679665-f5537f187268?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-  }
+  },
+  {
+    title: 'Portfolio Website',
+    description: 'Personal portfolio website showcasing projects and skills, built with React, Material-UI, and Framer Motion.',
+    technologies: ['React', 'Material-UI', 'Framer Motion'],
+    github: 'https://github.com/username/portfolio',
+    live: 'https://portfolio-example.com',
+    image: 'https://images.unsplash.com/photo-1557682250-2b274085f9df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2029&q=80',
+  },
+  {
+    title: 'Weather Dashboard',
+    description: 'A weather application that provides real-time forecasts, built with JavaScript and OpenWeather API.',
+    technologies: ['JavaScript', 'APIs', 'CSS3'],
+    github: 'https://github.com/username/weather-dashboard',
+    live: 'https://weather-example.com',
+    image: 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2051&q=80',
+  },
 ];
 
 const Projects = () => {
+  const { currentTheme } = useCustomTheme();
+  const [hoveredProject, setHoveredProject] = useState(null);
+  
   // Placeholder projects section image
   const projectsImageUrl = 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80';
   
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  // Derive RGB values for the theme color
+  const primaryRGB = {
+    r: parseInt(currentTheme.primary.slice(1, 3), 16),
+    g: parseInt(currentTheme.primary.slice(3, 5), 16),
+    b: parseInt(currentTheme.primary.slice(5, 7), 16)
+  };
+  
+  // Title line animation
+  const lineVariants = {
+    hidden: { width: 0 },
     visible: { 
-      opacity: 1,
+      width: '60px',
       transition: { 
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      } 
+        duration: 0.8,
+        ease: "easeOut",
+        delay: 0.3
+      }
     }
   };
   
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
+  // Project card animation variants
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 50 
+    },
     visible: { 
-      y: 0, 
-      opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      }
+    },
+    hover: { 
+      y: -15,
+      transition: { 
+        type: "spring",
+        stiffness: 300,
+        damping: 10
+      }
+    },
+    tap: {
+      scale: 0.98
     }
   };
 
@@ -44,7 +92,7 @@ const Projects = () => {
     <Parallax
       bgImage={projectsImageUrl}
       strength={400}
-      blur={{ min: -15, max: 15 }}
+      blur={{ min: -10, max: 15 }}
     >
       <Box
         id="projects"
@@ -62,186 +110,203 @@ const Projects = () => {
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundColor: 'rgba(10, 25, 47, 0.94)',
+            backgroundColor: 'rgba(10, 25, 47, 0.9)',
             zIndex: 1,
           },
         }}
       >
         <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <motion.div variants={itemVariants}>
-              <Typography
-                variant="h3"
-                sx={{
-                  color: 'text.primary',
-                  mb: 5,
-                  display: 'inline-block',
-                  position: 'relative',
-                  '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    bottom: '-10px',
-                    left: 0,
-                    width: '60px',
-                    height: '4px',
-                    backgroundColor: 'primary.main',
-                  },
+          <ScrollAnimation animation="slideUp" threshold={0.1}>
+            <Typography
+              variant="h3"
+              sx={{
+                color: 'text.primary',
+                mb: 1,
+                display: 'inline-block',
+                position: 'relative',
+              }}
+            >
+              Projects
+              <motion.div
+                variants={lineVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                style={{
+                  position: 'absolute',
+                  bottom: '-10px',
+                  left: 0,
+                  height: '4px',
+                  backgroundColor: currentTheme.primary,
+                  borderRadius: '2px',
                 }}
-              >
-                Projects
-              </Typography>
-            </motion.div>
-            
+              />
+            </Typography>
+          </ScrollAnimation>
+
+          <ScrollAnimation animation="slideUp" delay={0.2} threshold={0.1}>
             <Typography
               variant="body1"
               sx={{
                 color: 'text.secondary',
-                mb: 6,
+                mb: 5,
+                mt: 3,
                 maxWidth: '700px',
               }}
             >
-              Here are my project that I am working on it now. 
+              Here are some of the projects I've worked on. Each one represents a unique challenge
+              and showcases different skills and technologies.
             </Typography>
+          </ScrollAnimation>
 
-            <Grid container spacing={6}>
-              {projects.map((project, index) => (
-                <Grid item xs={12} key={project.title}>
+          <Grid container spacing={4}>
+            {projects.map((project, index) => (
+              <Grid item xs={12} md={6} lg={4} key={project.title}>
+                <ScrollAnimation 
+                  animation={index % 3 === 0 ? "slideUp" : index % 3 === 1 ? "slideLeft" : "slideRight"} 
+                  delay={0.1 * index}
+                  threshold={0.1}
+                >
                   <motion.div
-                    variants={itemVariants}
-                    whileHover={{ y: -10 }}
-                    transition={{ type: 'spring', stiffness: 200 }}
+                    variants={cardVariants}
+                    whileHover="hover"
+                    whileTap="tap"
+                    onHoverStart={() => setHoveredProject(project.title)}
+                    onHoverEnd={() => setHoveredProject(null)}
                   >
                     <Paper
                       elevation={3}
                       sx={{
-                        p: 0,
-                        overflow: 'hidden',
+                        height: '100%',
                         display: 'flex',
-                        flexDirection: { xs: 'column', md: index % 2 === 0 ? 'row' : 'row-reverse' },
-                        background: 'linear-gradient(145deg, rgba(17, 34, 64, 0.7), rgba(27, 44, 74, 0.9))',
-                        borderRadius: '10px',
+                        flexDirection: 'column',
+                        overflow: 'hidden',
+                        borderRadius: 3,
+                        background: 'linear-gradient(145deg, rgba(22, 33, 62, 0.7), rgba(26, 26, 46, 0.9))',
                         backdropFilter: 'blur(10px)',
-                        border: '1px solid rgba(100, 255, 218, 0.1)',
-                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                        '&:hover': {
-                          boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)',
-                        },
+                        border: `1px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1)`,
+                        transition: 'all 0.4s ease',
+                        position: 'relative',
                       }}
                     >
+                      {/* Project Image */}
                       <Box
                         sx={{
-                          width: { xs: '100%', md: '50%' },
-                          height: { xs: '250px', md: '400px' },
+                          height: '200px',
                           overflow: 'hidden',
                           position: 'relative',
+                          '&::before': {
+                            content: '""',
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            backgroundImage: hoveredProject === project.title 
+                              ? 'none' 
+                              : 'linear-gradient(rgba(10, 25, 47, 0.2), rgba(10, 25, 47, 0.6))',
+                            zIndex: 1,
+                            transition: 'all 0.4s ease',
+                          }
                         }}
                       >
-                        <Box
-                          component="img"
+                        <motion.img
                           src={project.image}
                           alt={project.title}
-                          sx={{
+                          style={{
                             width: '100%',
                             height: '100%',
                             objectFit: 'cover',
-                            transition: 'transform 0.5s ease',
-                            '&:hover': {
-                              transform: 'scale(1.05)',
-                            },
+                            transition: 'transform 0.4s ease',
+                            transform: hoveredProject === project.title ? 'scale(1.1)' : 'scale(1)',
                           }}
                         />
                       </Box>
-                      <Box
-                        sx={{
-                          width: { xs: '100%', md: '50%' },
-                          p: 4,
-                          display: 'flex',
-                          flexDirection: 'column',
-                          justifyContent: 'center',
-                        }}
-                      >
+                      
+                      {/* Project Details */}
+                      <Box sx={{ p: 3, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                         <Typography
-                          variant="h4"
+                          variant="h6"
                           sx={{
-                            color: 'primary.main',
-                            mb: 2,
+                            color: 'text.primary',
+                            mb: 1,
                             fontWeight: 600,
                           }}
                         >
                           {project.title}
                         </Typography>
+                        
                         <Typography
-                          variant="body1"
+                          variant="body2"
                           sx={{
                             color: 'text.secondary',
-                            mb: 3,
-                            lineHeight: 1.8,
+                            mb: 2,
+                            flexGrow: 1,
                           }}
                         >
                           {project.description}
                         </Typography>
-                        <Stack 
-                          direction="row" 
-                          spacing={1} 
-                          flexWrap="wrap" 
-                          sx={{ 
-                            mb: 4,
-                            gap: 1
-                          }}
-                        >
+                        
+                        <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap', gap: 1 }}>
                           {project.technologies.map((tech) => (
                             <Chip
                               key={tech}
                               label={tech}
                               size="small"
                               sx={{
-                                color: 'primary.main',
-                                backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                                fontWeight: 500,
-                                mb: 1,
+                                backgroundColor: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2)`,
+                                color: currentTheme.primary,
+                                borderRadius: '15px',
+                                '& .MuiChip-label': {
+                                  px: 1.5,
+                                  py: 0.5,
+                                  fontSize: '0.75rem',
+                                }
                               }}
                             />
                           ))}
                         </Stack>
-                        <Box
-                          sx={{
-                            display: 'flex',
-                            gap: 2,
-                            mt: 'auto',
-                          }}
-                        >
+                        
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
                           <Button
-                            variant="outlined"
+                            variant="text"
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
+                            component={motion.a}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                             sx={{
-                              color: 'primary.main',
-                              borderColor: 'primary.main',
+                              color: currentTheme.primary,
+                              textTransform: 'none',
+                              fontWeight: 600,
                               '&:hover': {
-                                borderColor: 'primary.light',
-                                backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                              },
+                                backgroundColor: 'transparent',
+                                textDecoration: 'underline',
+                              }
                             }}
                           >
                             GitHub
                           </Button>
+                          
                           <Button
-                            variant="contained"
+                            variant="outlined"
                             href={project.live}
                             target="_blank"
                             rel="noopener noreferrer"
+                            component={motion.a}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                             sx={{
-                              backgroundColor: 'primary.main',
-                              color: 'background.default',
+                              borderColor: currentTheme.primary,
+                              color: currentTheme.primary,
+                              textTransform: 'none',
+                              fontWeight: 600,
+                              borderRadius: '20px',
                               '&:hover': {
-                                backgroundColor: 'primary.dark',
-                              },
+                                borderColor: currentTheme.secondary,
+                                backgroundColor: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1)`,
+                              }
                             }}
                           >
                             Live Demo
@@ -250,10 +315,10 @@ const Projects = () => {
                       </Box>
                     </Paper>
                   </motion.div>
-                </Grid>
-              ))}
-            </Grid>
-          </motion.div>
+                </ScrollAnimation>
+              </Grid>
+            ))}
+          </Grid>
         </Container>
       </Box>
     </Parallax>
