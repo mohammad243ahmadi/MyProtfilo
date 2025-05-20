@@ -32,7 +32,7 @@ const Contact = () => {
     // Initialize EmailJS with your user ID (public key)
     // This initialization is optional as you're passing the user ID with each send call
     // But it's recommended as a best practice
-    // emailjs.init("YOUR_EMAILJS_USER_ID");
+    emailjs.init("wBbAChWzwh8V6pXIg");
   }, []);
 
   const handleChange = (e) => {
