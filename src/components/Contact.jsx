@@ -379,6 +379,26 @@ const Contact = () => {
                         Whatsapp
                       </Button>
                     </motion.div>
+                    <motion.div variants={itemVariants} whileHover={{ scale: 1.1 }}>
+                      <Button
+                        href="https://www.instagram.com/mohammad.243ahmadi?utm_source=qr&igsh=MTBkZnFmbTAydTZoNg=="
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variant="outlined"
+                        sx={{
+                          minWidth: '120px',
+                          color: 'primary.main',
+                          borderColor: 'primary.main',
+                          borderRadius: '8px',
+                          '&:hover': {
+                            borderColor: 'primary.light',
+                            backgroundColor: 'rgba(100, 255, 218, 0.1)',
+                          },
+                        }}
+                      >
+                        FaceBook
+                      </Button>
+                    </motion.div>
                   </Box>
                 </Grid>
               </Grid>
