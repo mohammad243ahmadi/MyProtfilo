@@ -53,16 +53,15 @@ const About = () => {
     'JavaScript',
     'Node.js',
     'PostgreSQL',
-    'Data Analysis',
-    'Machine Learning',
-    'Web Development'
+    'Web Development',
+    'express.js'
   ];
 
   return (
     <Parallax
       bgImage={aboutImageUrl}
       strength={300}
-      blur={{ min: -15, max: 15 }}
+      blur={{ min: -10, max: 10 }}
     >
       <Box
         id="about"
@@ -246,7 +245,7 @@ const About = () => {
                     }}
                   >
                     <Avatar
-                      src="https://via.placeholder.com/350"
+                      src="https://plus.unsplash.com/premium_photo-1720287601920-ee8c503af775?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHdlYiUyMGRldmVsb3BlcnxlbnwwfHwwfHx8MA%3D%3D"
                       alt="M.Hussain Ahmadi"
                       variant="rounded"
                       sx={{

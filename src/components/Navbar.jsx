@@ -150,6 +150,7 @@ const Navbar = () => {
                     height: 3,
                     borderRadius: '3px',
                     background: `linear-gradient(90deg, transparent, ${currentTheme.primary}, transparent)`
+                    
                   }
                 }}
               >

@@ -22,7 +22,7 @@ const projects = [
       "A modern, responsive website for an upscale Italian restaurant built with React and styled-components.",
     technologies: ["React", "JavaScript", "paralix"],
     github: "https://github.com/mohammad243ahmadi/ItalianRestaurant",
-    live: "https://italian-restaurant-pied.vercel.app/",
+    live: "https://italian-restaurant-mu.vercel.app/",
     image:
       "https://images.unsplash.com/photo-1554679665-f5537f187268?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
   },
@@ -34,7 +34,7 @@ const projects = [
     github: "https://github.com/mohammad243ahmadi/my_CV2",
     live: "#",
     image:
-      "https://images.unsplash.com/photo-1557682250-2b274085f9df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2029&q=80",
+      "https://images.unsplash.com/photo-1623479322729-28b25c16b011?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHdlYiUyMGRldmVsb3BlcnxlbnwwfHwwfHx8MA%3D%3D",
   },
   
 ];
@@ -99,7 +99,7 @@ const Projects = () => {
     <Parallax
       bgImage={projectsImageUrl}
       strength={400}
-      blur={{ min: -10, max: 15 }}
+      blur={{ min: -10, max: 10 }}
     >
       <Box
         id="projects"
