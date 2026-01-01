@@ -16,27 +16,42 @@ import ScrollAnimation from "./common/ScrollAnimation";
 
 // Enhanced project data with images
 const projects = [
-  {
-    title: "Fresco Italian Restaurant",
-    description:
-      "A modern, responsive website for an upscale Italian restaurant built with React and styled-components.",
-    technologies: ["React", "JavaScript", "paralix"],
-    github: "https://github.com/mohammad243ahmadi/ItalianRestaurant",
-    live: "https://italian-restaurant-mu.vercel.app/",
-    image:
-      "https://images.unsplash.com/photo-1554679665-f5537f187268?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
-  },
-  {
-    title: "Portfolio Website",
-    description:
-      "Personal portfolio website showcasing projects and skills, built with React, Material-UI, and Framer Motion.",
-    technologies: ["React", "Material-UI", "Framer Motion"],
-    github: "https://github.com/mohammad243ahmadi/my_CV2",
-    live: "#",
-    image:
-      "https://images.unsplash.com/photo-1623479322729-28b25c16b011?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHdlYiUyMGRldmVsb3BlcnxlbnwwfHwwfHx8MA%3D%3D",
-  },
-  
+    {
+        title: "Fresco Italian Restaurant",
+        description:
+            "A modern, responsive website for an upscale Italian restaurant built with React and styled-components.",
+        technologies: ["React", "JavaScript", "paralix"],
+        github: "https://github.com/mohammad243ahmadi/ItalianRestaurant",
+        live: "https://italian-restaurant-mu.vercel.app/",
+        image: "https://images.unsplash.com/photo-1554679665-f5537f187268?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    },
+    {
+        title: "Portfolio Website",
+        description:
+            "Personal portfolio website showcasing projects and skills, built with React, Material-UI, and Framer Motion.",
+        technologies: ["React", "Material-UI", "Framer Motion"],
+        github: "https://github.com/mohammad243ahmadi/my_CV2",
+        live: "#",
+        image: "https://images.unsplash.com/photo-1623479322729-28b25c16b011?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHdlYiUyMGRldmVsb3BlcnxlbnwwfHwwfHx8MA%3D%3D",
+    },
+    {
+        title: "Telegram Bot",
+        description:
+            "A comprehensive Telegram bot with an admin dashboard for tracking employee work activities, breaks, and generating detailed time reports.",
+        technologies: ["Python", "Flask", "Sqlite"],
+        github: "https://github.com/mohammad243ahmadi/WorkingTimeLoggerBot",
+        live: "#",
+        image: "https://plus.unsplash.com/premium_vector-1721387158191-0005c0c504d9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHRpbWUlMjBsb2dnZXJ8ZW58MHx8MHx8fDA%3D",
+    },
+    {
+        title: "Safir The Elite Educational Center",
+        description:
+            "A modern educational platform with a proper client/server architecture.",
+        technologies: ["React", "Node.js", "Express", "PostgreSQL"],
+        github: "#",
+        live: "#",
+        image: "https://plus.unsplash.com/premium_vector-1720082660197-b1a163e1372a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Q291cnNlfGVufDB8fDB8fHww",
+    },
 ];
 
 const Projects = () => {
@@ -127,10 +142,14 @@ const Projects = () => {
             <Typography
               variant="h3"
               sx={{
-                color: "text.primary",
+                background: `linear-gradient(135deg, #fff 0%, ${currentTheme.secondary} 100%)`,
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
                 mb: 1,
                 display: "inline-block",
                 position: "relative",
+                fontWeight: 800,
               }}
             >
               Projects
@@ -144,7 +163,7 @@ const Projects = () => {
                   bottom: "-10px",
                   left: 0,
                   height: "4px",
-                  backgroundColor: currentTheme.primary,
+                  background: `linear-gradient(90deg, ${currentTheme.primary}, ${currentTheme.secondary})`,
                   borderRadius: "2px",
                 }}
               />
@@ -189,41 +208,32 @@ const Projects = () => {
                     onHoverEnd={() => setHoveredProject(null)}
                   >
                     <Paper
-                      elevation={3}
+                      elevation={0}
                       sx={{
                         height: "100%",
                         display: "flex",
                         flexDirection: "column",
                         overflow: "hidden",
-                        borderRadius: 3,
-                        background:
-                          "linear-gradient(145deg, rgba(22, 33, 62, 0.7), rgba(26, 26, 46, 0.9))",
-                        backdropFilter: "blur(10px)",
-                        border: `1px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1)`,
-                        transition: "all 0.4s ease",
+                        borderRadius: "24px",
+                        background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1), rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.05))`,
+                        backdropFilter: "blur(15px)",
+                        border: `1.5px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2)`,
+                        transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                         position: "relative",
+                        "&:hover": {
+                          transform: "translateY(-12px)",
+                          border: `1.5px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.5)`,
+                          background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.15), rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1))`,
+                          boxShadow: `0 20px 40px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2)`,
+                        }
                       }}
                     >
                       {/* Project Image */}
                       <Box
                         sx={{
-                          height: "200px",
+                          height: "220px",
                           overflow: "hidden",
                           position: "relative",
-                          "&::before": {
-                            content: '""',
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            width: "100%",
-                            height: "100%",
-                            backgroundImage:
-                              hoveredProject === project.title
-                                ? "none"
-                                : "linear-gradient(rgba(10, 25, 47, 0.2), rgba(10, 25, 47, 0.6))",
-                            zIndex: 1,
-                            transition: "all 0.4s ease",
-                          },
                         }}
                       >
                         <motion.img
@@ -233,11 +243,18 @@ const Projects = () => {
                             width: "100%",
                             height: "100%",
                             objectFit: "cover",
-                            transition: "transform 0.4s ease",
-                            transform:
-                              hoveredProject === project.title
-                                ? "scale(1.1)"
-                                : "scale(1)",
+                            transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                          }}
+                          whileHover={{ scale: 1.1 }}
+                        />
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            background: `linear-gradient(to bottom, transparent 0%, rgba(10, 25, 47, 0.4) 100%)`,
                           }}
                         />
                       </Box>
@@ -245,18 +262,19 @@ const Projects = () => {
                       {/* Project Details */}
                       <Box
                         sx={{
-                          p: 3,
+                          p: 4,
                           flexGrow: 1,
                           display: "flex",
                           flexDirection: "column",
                         }}
                       >
                         <Typography
-                          variant="h6"
+                          variant="h5"
                           sx={{
                             color: "text.primary",
-                            mb: 1,
-                            fontWeight: 600,
+                            mb: 1.5,
+                            fontWeight: 700,
+                            letterSpacing: '-0.5px'
                           }}
                         >
                           {project.title}
@@ -266,8 +284,10 @@ const Projects = () => {
                           variant="body2"
                           sx={{
                             color: "text.secondary",
-                            mb: 2,
+                            mb: 3,
                             flexGrow: 1,
+                            lineHeight: 1.6,
+                            fontSize: '0.95rem'
                           }}
                         >
                           {project.description}
@@ -276,7 +296,7 @@ const Projects = () => {
                         <Stack
                           direction="row"
                           spacing={1}
-                          sx={{ mb: 2, flexWrap: "wrap", gap: 1 }}
+                          sx={{ mb: 3, flexWrap: "wrap", gap: 1 }}
                         >
                           {project.technologies.map((tech) => (
                             <Chip
@@ -284,14 +304,22 @@ const Projects = () => {
                               label={tech}
                               size="small"
                               sx={{
-                                backgroundColor: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2)`,
+                                background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.15), rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.08))`,
                                 color: currentTheme.primary,
-                                borderRadius: "15px",
+                                borderRadius: "10px",
+                                border: `1.5px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.25)`,
+                                fontWeight: 600,
+                                fontSize: "0.75rem",
+                                backdropFilter: "blur(10px)",
+                                transition: "all 0.3s ease",
                                 "& .MuiChip-label": {
-                                  px: 1.5,
-                                  py: 0.5,
-                                  fontSize: "0.75rem",
+                                  px: 1,
                                 },
+                                "&:hover": {
+                                  background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.25), rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.15))`,
+                                  borderColor: currentTheme.primary,
+                                  transform: 'scale(1.05)',
+                                }
                               }}
                             />
                           ))}
@@ -300,52 +328,59 @@ const Projects = () => {
                         <Box
                           sx={{
                             display: "flex",
-                            justifyContent: "space-between",
-                            mt: 1,
+                            gap: 2,
+                            mt: 'auto',
                           }}
                         >
                           <Button
-                            variant="text"
+                            variant="outlined"
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            component={motion.a}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
                             sx={{
-                              color: currentTheme.primary,
+                              flex: 1,
+                              borderColor: currentTheme.primary,
+                              color: 'text.primary',
                               textTransform: "none",
                               fontWeight: 600,
+                              borderRadius: "14px",
+                              py: 1.2,
+                              background: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.08)`,
+                              borderWidth: '1.5px',
+                              transition: 'all 0.3s ease',
                               "&:hover": {
-                                backgroundColor: "transparent",
-                                textDecoration: "underline",
+                                borderColor: currentTheme.primary,
+                                backgroundColor: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.15)`,
+                                transform: 'translateY(-2px)',
+                                boxShadow: `0 8px 20px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2)`,
                               },
                             }}
                           >
-                            GitHub
+                            → GitHub
                           </Button>
 
                           <Button
-                            variant="outlined"
+                            variant="contained"
                             href={project.live}
                             target="_blank"
                             rel="noopener noreferrer"
-                            component={motion.a}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
                             sx={{
-                              borderColor: currentTheme.primary,
-                              color: currentTheme.primary,
+                              flex: 1,
+                              background: `linear-gradient(135deg, ${currentTheme.primary}, ${currentTheme.secondary})`,
+                              color: "#0A192F",
                               textTransform: "none",
-                              fontWeight: 600,
-                              borderRadius: "20px",
+                              fontWeight: 700,
+                              borderRadius: "14px",
+                              py: 1.2,
+                              boxShadow: `0 6px 20px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.4)`,
+                              transition: 'all 0.3s ease',
                               "&:hover": {
-                                borderColor: currentTheme.secondary,
-                                backgroundColor: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1)`,
+                                transform: 'translateY(-3px)',
+                                boxShadow: `0 10px 30px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.6)`,
                               },
                             }}
                           >
-                            Live Demo
+                            Visit Live →
                           </Button>
                         </Box>
                       </Box>

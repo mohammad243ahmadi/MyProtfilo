@@ -113,7 +113,7 @@ const About = () => {
             </Typography>
           </ScrollAnimation>
 
-          <Grid container spacing={6} alignItems="center" sx={{ mt: 3 }}>
+          <Grid container spacing={6} alignItems="center" sx={{ mt: 5 }}>
             <Grid item xs={12} md={6}>
               <ScrollAnimation animation="slideRight" delay={0.2} threshold={0.1}>
                 <Typography
@@ -122,11 +122,11 @@ const About = () => {
                     color: 'text.secondary',
                     mb: 3,
                     lineHeight: 1.8,
+                    fontSize: '1.1rem'
                   }}
                 >
-                  Hello! I'm M.Hussain Ahmadi, a passionate Python and web developer with a strong
-                  foundation in building modern web applications. My journey in programming started
-                  with Python, and I've since expanded my skills to include full-stack web development.
+                  Hello! I'm <span style={{ color: currentTheme.primary, fontWeight: 700, background: `linear-gradient(135deg, ${currentTheme.primary}, ${currentTheme.secondary})`, backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>M.Hussain Ahmadi</span>, a passionate Python and web developer with a strong
+                  foundation in building modern web applications. My journey started with Python and has evolved into comprehensive full-stack web development expertise.
                 </Typography>
               </ScrollAnimation>
               
@@ -137,36 +137,21 @@ const About = () => {
                     color: 'text.secondary',
                     mb: 3,
                     lineHeight: 1.8,
+                    fontSize: '1.1rem'
                   }}
                 >
-                  I've been teaching programming languages like Python at Safir Educational Center,
-                  where I help students develop their coding skills and understand complex programming
-                  concepts through practical projects and hands-on exercises.
+                  I'm passionate about teaching at <span style={{ color: currentTheme.primary, fontWeight: 600 }}>Safir Educational Center</span>, where I guide students to master programming concepts through hands-on projects and practical exercises, building strong foundations for their coding careers.
                 </Typography>
               </ScrollAnimation>
               
-              <ScrollAnimation animation="slideRight" delay={0.4} threshold={0.1}>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: 'text.secondary',
-                    mb: 4,
-                    lineHeight: 1.8,
-                  }}
-                >
-                  My approach to both development and teaching focuses on creating clean, efficient,
-                  and maintainable code. I'm constantly learning new technologies and methodologies to
-                  improve my skills and stay current in this rapidly evolving field.
-                </Typography>
-              </ScrollAnimation>
-              
-              <ScrollAnimation animation="slideUp" delay={0.5} threshold={0.1}>
+              <ScrollAnimation animation="slideUp" delay={0.4} threshold={0.1}>
                 <Typography
                   variant="h6"
                   sx={{
                     color: 'text.primary',
-                    mb: 2,
-                    fontWeight: 500,
+                    mb: 3,
+                    fontWeight: 700,
+                    letterSpacing: '0.5px'
                   }}
                 >
                   Technologies I work with:
@@ -181,30 +166,30 @@ const About = () => {
                         transition={{ delay: 0.1 * index, duration: 0.5 }}
                         viewport={{ once: true }}
                       >
-                        <Typography
-                          variant="body2"
+                        <Box
                           sx={{
-                            color: currentTheme.primary,
                             display: 'flex',
                             alignItems: 'center',
-                            transition: 'all 0.2s ease',
-                            '&::before': {
-                              content: '"▹"',
-                              color: currentTheme.primary,
-                              mr: 1,
-                              fontSize: '1.2rem',
-                              transition: 'all 0.2s ease',
-                            },
+                            p: 1.8,
+                            borderRadius: '14px',
+                            background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.12), rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.06))`,
+                            border: `1.5px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2)`,
+                            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            backdropFilter: 'blur(10px)',
                             '&:hover': {
-                              transform: 'translateX(5px)',
-                              '&::before': {
-                                transform: 'scale(1.2)',
-                              }
+                              transform: 'translateY(-5px)',
+                              background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.18), rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.12))`,
+                              borderColor: currentTheme.primary,
+                              color: 'text.primary',
+                              boxShadow: `0 8px 20px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2)`,
                             }
                           }}
                         >
-                          {tech}
-                        </Typography>
+                          <Typography variant="body2" sx={{ fontWeight: 600, color: 'text.primary' }}>
+                            <span style={{ color: currentTheme.primary, marginRight: '8px', fontSize: '1.2em' }}>✦</span>
+                            {tech}
+                          </Typography>
+                        </Box>
                       </motion.div>
                     </Grid>
                   ))}
@@ -219,31 +204,30 @@ const About = () => {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.02 }}
                 >
                   <Box
                     sx={{
                       position: 'relative',
-                      maxWidth: '350px',
-                      '&::before': {
-                        content: '""',
-                        position: 'absolute',
-                        top: 20,
-                        left: 20,
-                        width: '100%',
-                        height: '100%',
-                        border: `2px solid ${currentTheme.primary}`,
-                        borderRadius: 2,
-                        zIndex: 1,
-                        transition: 'all 0.3s ease',
-                      },
-                      '&:hover::before': {
-                        top: 10,
-                        left: 10,
-                      }
+                      maxWidth: '380px',
+                      p: 2,
                     }}
                   >
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2), rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.05))`,
+                        border: `2px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.4)`,
+                        borderRadius: '24px',
+                        zIndex: 1,
+                        transition: 'all 0.3s ease',
+                        backdropFilter: 'blur(10px)',
+                      }}
+                    />
                     <Avatar
                       src="https://plus.unsplash.com/premium_photo-1720287601920-ee8c503af775?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHdlYiUyMGRldmVsb3BlcnxlbnwwfHwwfHx8MA%3D%3D"
                       alt="M.Hussain Ahmadi"
@@ -252,16 +236,28 @@ const About = () => {
                         width: '100%',
                         height: 'auto',
                         aspectRatio: '1/1',
-                        borderRadius: 2,
+                        borderRadius: '16px',
                         position: 'relative',
                         zIndex: 2,
-                        border: `4px solid ${currentTheme.primary}`,
-                        boxShadow: `0 10px 30px -10px rgba(0, 0, 0, 0.3)`,
-                        filter: 'grayscale(40%)',
-                        transition: 'all 0.3s ease',
+                        boxShadow: `0 20px 40px rgba(0, 0, 0, 0.4)`,
+                        filter: 'grayscale(20%) contrast(1.1)',
+                        transition: 'all 0.4s ease',
                         '&:hover': {
-                          filter: 'grayscale(0%)',
+                          filter: 'grayscale(0%) contrast(1)',
                         }
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        bottom: -15,
+                        right: -15,
+                        width: '100px',
+                        height: '100px',
+                        background: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1)`,
+                        borderRadius: '50%',
+                        filter: 'blur(30px)',
+                        zIndex: 0
                       }}
                     />
                   </Box>

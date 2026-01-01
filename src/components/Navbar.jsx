@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Box, IconButton, Drawer, List, ListItem, ListItemText,useScrollTrigger, Fade,Button} from '@mui/material';
-import { Link } from 'react-scroll';
+import { AppBar, Toolbar, Typography, Box, IconButton, Drawer, List, ListItem, ListItemText, useScrollTrigger, Fade, Button } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useTheme as useCustomTheme } from '../context/ThemeContext';
 
 // Hide navbar on scroll down but with a smooth fade effect
@@ -20,12 +20,19 @@ function HideOnScroll(props) {
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState('/');
   const [scrolled, setScrolled] = useState(false);
   const { toggleCustomizeDialog, currentTheme } = useCustomTheme();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleNav = (path) => {
+    navigate(path);
+    setMobileOpen(false);
   };
 
   // Update active section and scrolled state based on scroll position
@@ -33,30 +40,23 @@ const Navbar = () => {
     const handleScroll = () => {
       // Update scrolled state for glass effect intensity
       setScrolled(window.scrollY > 50);
-      
-      const sections = document.querySelectorAll('section, [id]');
-      let currentSection = 'hero';
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (window.scrollY >= sectionTop - 200) {
-          currentSection = section.id || section.getAttribute('id');
-        }
-      });
-      
-      setActiveSection(currentSection);
     };
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Sync active nav item with current route
+  useEffect(() => {
+    setActiveSection(location.pathname || '/');
+  }, [location.pathname]);
+
   const navItems = [
-    { name: 'Home', to: 'hero' },
-    { name: 'About', to: 'about' },
-    { name: 'Teaching', to: 'skills' },
-    { name: 'Projects', to: 'projects' },
-    { name: 'Contact', to: 'contact' },
+    { name: 'Home', to: '/' },
+    { name: 'About', to: '/about' },
+    { name: 'Teaching', to: '/skills' },
+    { name: 'Projects', to: '/projects' },
+    { name: 'Contact', to: '/contact' },
   ];
 
   const logoVariants = {
@@ -165,13 +165,9 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + index * 0.1, type: "spring" }}
                 >
-                  <ListItem 
-                    component={Link} 
-                    to={item.to} 
-                    smooth={true} 
-                    duration={800}
-                    offset={-70}
-                    onClick={handleDrawerToggle}
+                  <ListItem
+                    button
+                    onClick={() => handleNav(item.to)}
                     sx={{
                       py: 2,
                       px: 3,
@@ -189,9 +185,9 @@ const Navbar = () => {
                       }
                     }}
                   >
-                    <ListItemText 
-                      primary={item.name} 
-                      sx={{ 
+                    <ListItemText
+                      primary={item.name}
+                      sx={{
                         color: activeSection === item.to ? 'primary.main' : 'text.primary',
                         fontWeight: activeSection === item.to ? 600 : 400,
                       }}
@@ -295,27 +291,30 @@ const Navbar = () => {
               variant="h6" 
               component="div" 
               sx={{ 
-                color: 'primary.main',
-                fontWeight: 'bold',
+                background: `linear-gradient(135deg, ${currentTheme.primary}, ${currentTheme.secondary})`,
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                fontWeight: 800,
                 letterSpacing: '-0.02em',
-                fontSize: scrolled ? '1.2rem' : '1.4rem',
+                fontSize: scrolled ? '1.15rem' : '1.3rem',
                 transition: 'all 0.3s ease',
                 position: 'relative',
                 display: 'inline-block',
                 '&::after': {
                   content: '""',
                   position: 'absolute',
-                  bottom: -5,
+                  bottom: -6,
                   left: 0,
-                  width: scrolled ? '25%' : '30%',
-                  height: 3,
-                  backgroundColor: 'primary.main',
+                  width: scrolled ? '30%' : '35%',
+                  height: 2.5,
+                  background: `linear-gradient(90deg, ${currentTheme.primary}, ${currentTheme.secondary})`,
                   borderRadius: '2px',
                   transition: 'all 0.3s ease',
                 }
               }}
             >
-          M.Hussain Ahmadi
+          Hussain Ahmadi
         </Typography>
           </motion.div>
           
@@ -328,18 +327,20 @@ const Navbar = () => {
                 animate="visible"
                 variants={navItemVariants}
               >
-            <Link
-              to={item.to}
-              smooth={true}
-                  duration={800}
-                  offset={-70}
+            <Box
+              component="button"
+              onClick={() => handleNav(item.to)}
               style={{
-                    position: 'relative',
-                    padding: '8px 16px',
+                background: 'transparent',
+                border: 'none',
+                position: 'relative',
+                padding: '8px 16px',
                 cursor: 'pointer',
-                    overflow: 'hidden'
-                  }}
-                >
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
                   <Box
                     component={motion.div}
                     whileHover={{ scale: 1.05 }}
@@ -348,16 +349,16 @@ const Navbar = () => {
                       position: 'relative',
                       zIndex: 2,
                       color: activeSection === item.to ? 'primary.main' : 'text.primary',
-                      fontWeight: activeSection === item.to ? 600 : 400,
+                      fontWeight: activeSection === item.to ? 700 : 500,
                       transition: 'all 0.3s ease',
                       fontSize: '0.95rem',
-                      px: 1,
-                      py: 0.5,
-                      borderRadius: '20px',
+                      px: 2,
+                      py: 0.8,
+                      borderRadius: '12px',
                       backgroundColor: activeSection === item.to 
                         ? `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.15)` 
                         : 'transparent',
-                '&:hover': {
+                      '&:hover': {
                         backgroundColor: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1)`,
                         color: 'primary.main'
                       }
@@ -372,18 +373,17 @@ const Navbar = () => {
                       layoutId="desktopActiveIndicator"
                       sx={{
                         position: 'absolute',
-                        bottom: -2,
-                        left: '50%',
-                        width: '30%',
+                        bottom: 4,
+                        width: '20px',
                         height: '3px',
                         backgroundColor: 'primary.main',
                         zIndex: 1,
-                        transform: 'translateX(-50%)',
-                        borderRadius: '2px'
+                        borderRadius: '2px',
+                        boxShadow: `0 0 10px ${currentTheme.primary}`,
                       }}
                     />
                   )}
-                </Link>
+            </Box>
               </motion.div>
             ))}
             
@@ -397,28 +397,28 @@ const Navbar = () => {
                 variant="outlined"
                 onClick={toggleCustomizeDialog}
                 sx={{
-                  borderColor: 'primary.main',
+                  borderColor: currentTheme.primary,
                   color: 'primary.main',
                   ml: 2,
-                  px: 3,
-                  py: 0.8,
-                  borderRadius: '30px',
+                  px: 4,
+                  py: 1,
+                  borderRadius: '18px',
                   backdropFilter: 'blur(5px)',
-                  background: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1)`,
-                  borderWidth: 1,
+                  background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.12), rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.08))`,
+                  borderWidth: 1.5,
                   fontSize: '0.9rem',
                   textTransform: 'none',
                   fontWeight: 600,
                   transition: 'all 0.3s ease',
                   '&:hover': {
-                    borderColor: 'primary.light',
-                    background: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2)`,
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+                    borderColor: currentTheme.primary,
+                    background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2), rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.15))`,
+                    transform: 'translateY(-3px)',
+                    boxShadow: `0 8px 20px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.3)`,
                   }
                 }}
               >
-                Customize
+                🎨 Customize
               </Button>
             </motion.div>
           </Box>

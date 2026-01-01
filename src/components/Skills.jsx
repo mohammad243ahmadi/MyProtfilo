@@ -106,13 +106,17 @@ const Skills = () => {
             <Typography
               variant="h3"
               sx={{
-                color: "text.primary",
+                background: `linear-gradient(135deg, #fff 0%, ${currentTheme.secondary} 100%)`,
+                backgroundClip: "text",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
                 mb: 1,
                 display: "inline-block",
                 position: "relative",
+                fontWeight: 800,
               }}
             >
-              Teaching
+              Teaching & Skills
               <motion.div
                 variants={lineVariants}
                 initial="hidden"
@@ -123,7 +127,7 @@ const Skills = () => {
                   bottom: "-10px",
                   left: 0,
                   height: "4px",
-                  backgroundColor: currentTheme.primary,
+                  background: `linear-gradient(90deg, ${currentTheme.primary}, ${currentTheme.secondary})`,
                   borderRadius: "2px",
                 }}
               />
@@ -157,9 +161,13 @@ const Skills = () => {
                   <Typography
                     variant="h5"
                     sx={{
-                      color: "primary.main",
+                      background: `linear-gradient(90deg, ${currentTheme.primary}, ${currentTheme.secondary})`,
+                      backgroundClip: "text",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
                       mb: 3,
-                      fontWeight: 500,
+                      fontWeight: 700,
+                      letterSpacing: "0.5px",
                     }}
                   >
                     {category}
@@ -192,68 +200,79 @@ const Skills = () => {
                           }}
                         >
                           <Paper
-                            elevation={2}
+                            elevation={0}
                             sx={{
-                              p: 3,
+                              p: 4,
                               height: "100%",
                               display: "flex",
                               flexDirection: "column",
-                              background:
-                                "linear-gradient(145deg, rgba(22, 33, 62, 0.6), rgba(26, 26, 46, 0.8))",
-                              borderRadius: "16px",
-                              backdropFilter: "blur(10px)",
-                              border: `1px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1)`,
-                              transition: "all 0.4s ease",
+                              background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1), rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.05))`,
+                              borderRadius: "24px",
+                              backdropFilter: "blur(15px)",
+                              border: `1.5px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2)`,
+                              transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                               position: "relative",
                               overflow: "hidden",
-                              "&::before": {
-                                content: '""',
-                                position: "absolute",
-                                top: 0,
-                                left: 0,
-                                width: "100%",
-                                height: "100%",
-                                background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1) 0%, rgba(26, 26, 46, 0) 50%)`,
-                                zIndex: 0,
-                              },
+                              "&:hover": {
+                                border: `1.5px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.5)`,
+                                background: `linear-gradient(135deg, rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.15), rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1))`,
+                                boxShadow: `0 10px 30px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.2)`,
+                                "& .skill-icon": {
+                                  transform: "scale(1.1) rotate(10deg)",
+                                  color: currentTheme.primary,
+                                }
+                              }
                             }}
-                            className="card-shine"
                           >
-                            <Typography
-                              variant="h6"
-                              sx={{
-                                color: "text.primary",
-                                mb: 1,
-                                position: "relative",
-                                zIndex: 2,
-                              }}
-                            >
-                              {skill.name}
-                            </Typography>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                              <Typography
+                                variant="h6"
+                                sx={{
+                                  color: "text.primary",
+                                  fontWeight: 700,
+                                  position: "relative",
+                                  zIndex: 2,
+                                  letterSpacing: '0.5px'
+                                }}
+                              >
+                                {skill.name}
+                              </Typography>
+                              <Box 
+                                className="skill-icon"
+                                sx={{ 
+                                  color: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.4)`,
+                                  transition: 'all 0.3s ease'
+                                }}
+                              >
+                                {/* We can add icons here later if needed */}
+                              </Box>
+                            </Box>
 
                             <Box
-                              sx={{ mt: 2, position: "relative", zIndex: 2 }}
+                              sx={{ mt: 'auto', position: "relative", zIndex: 2 }}
                             >
                               <Typography
                                 variant="body2"
                                 sx={{
                                   color: "text.secondary",
-                                  mb: 1,
+                                  mb: 1.5,
                                   display: "flex",
                                   justifyContent: "space-between",
+                                  fontWeight: 500
                                 }}
                               >
                                 <span>Proficiency</span>
-                                <span>{skill.level}%</span>
+                                <span style={{ color: currentTheme.primary }}>{skill.level}%</span>
                               </Typography>
                               <Box
                                 sx={{
-                                  height: 6,
+                                  height: 10,
                                   width: "100%",
                                   backgroundColor: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.1)`,
-                                  borderRadius: 5,
+                                  borderRadius: 20,
                                   overflow: "hidden",
                                   position: "relative",
+                                  border: `1px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.15)`,
                                 }}
                               >
                                 <motion.div
@@ -265,32 +284,15 @@ const Skills = () => {
                                   style={{
                                     height: "100%",
                                     background: `linear-gradient(90deg, ${currentTheme.primary} 0%, ${currentTheme.secondary} 100%)`,
-                                    borderRadius: 5,
+                                    borderRadius: 20,
                                     position: "absolute",
                                     top: 0,
                                     left: 0,
+                                    boxShadow: `0 0 15px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2)`,
                                   }}
                                 />
                               </Box>
                             </Box>
-
-                            {/* Decorative element */}
-                            <Box
-                              component={motion.div}
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              transition={{ delay: 0.6 + index * 0.1 }}
-                              sx={{
-                                position: "absolute",
-                                top: 15,
-                                right: 15,
-                                width: "30px",
-                                height: "30px",
-                                borderRadius: "50%",
-                                border: `2px solid rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.3)`,
-                                zIndex: 1,
-                              }}
-                            />
                           </Paper>
                         </motion.div>
                       </ScrollAnimation>

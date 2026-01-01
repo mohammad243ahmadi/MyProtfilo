@@ -1,18 +1,14 @@
-import React from "react";
-import { Box, Typography, Button, Container, Grid } from "@mui/material";
+import React, { useCallback } from "react";
+import { Box, Typography, Button, Container, Grid, Fade } from "@mui/material";
 import { motion } from "framer-motion";
-import { Parallax } from "react-parallax";
+import { useNavigate } from "react-router-dom";
 import { useTheme as useCustomTheme } from "../context/ThemeContext";
-import { Link } from "react-scroll";
-import ScrollAnimation from "./common/ScrollAnimation";
+import DownloadIcon from '@mui/icons-material/Download';
 
 // Hero component with parallax background
 const Hero = () => {
   const { currentTheme } = useCustomTheme();
-
-  // Placeholder hero image URL (replace with your preferred image)
-  const heroImageUrl =
-    "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80";
+  const navigate = useNavigate();
 
   // Developer profile image - replace with your actual image path
   const developerImageUrl =
@@ -66,276 +62,241 @@ const Hero = () => {
   };
 
   const title = "Hi, I'm M.Hussain Ahmadi";
+  
+  // Function to handle CV download
+  const handleDownloadCV = useCallback(() => {
+    const link = document.createElement('a');
+    link.href = `${process.env.PUBLIC_URL}/resume.pdf`;
+    link.download = 'M_Hussain_Ahmadi_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }, []);
+
+  // Navigate to a route
+  const goTo = useCallback((path) => {
+    navigate(path);
+  }, [navigate]);
 
   return (
-    <Parallax bgImage={heroImageUrl} strength={500} blur={{ min: -5, max: 15 }}>
-      <Box
-        id="hero"
-        sx={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          position: "relative",
-          "&::before": {
-            content: '""',
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(10, 25, 47, 0.85)",
-            zIndex: 1,
-          },
-        }}
-      >
-        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-          <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={7}>
-              <Box>
-                <ScrollAnimation animation="slideUp" delay={0.2}>
-                  <Typography
-                    variant="overline"
-                    sx={{
-                      color: currentTheme.primary,
-                      fontWeight: "bold",
-                      letterSpacing: "2px",
-                      display: "block",
-                      mb: 2,
-                      
-                    }}
-                  >
-                    Python and Web Developer
-                  </Typography>
-                </ScrollAnimation>
-
-                <motion.div
-                  variants={typingVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <Typography
-                    variant="h1"
-                    sx={{
-                      color: "text.primary",
-                      fontWeight: 700,
-                      fontSize: { xs: "2.5rem", md: "3.5rem" },
-                      mb: 3,
-                      lineHeight: 1.1,
-                      whiteSpace: "normal",
-                      wordBreak: "break-word",
-                      display: "block",
-                    }}
-                  >
-                    <motion.span
-                      variants={letterVariants}
-                      style={{ display: "inline-block" }}
-                    >
-                      {title}
-                    </motion.span>
-                  </Typography>
-                </motion.div>
-
-                <ScrollAnimation animation="slideUp" delay={0.4}>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "text.secondary",
-                      mb: 5,
-                      fontSize: { xs: "1rem", md: "1.1rem" },
-                      maxWidth: "600px",
-                    }}
-                  >
-                    A passionate Python developer and educator with expertise in
-                    web development. I
-                    create innovative solutions to your websites and apps and help students master
-                    programming skills.
-                  </Typography>
-                </ScrollAnimation>
-
-                <ScrollAnimation animation="slideUp" delay={0.6}>
-                  <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Link
-                        to="contact"
-                        smooth={true}
-                        duration={800}
-                        offset={-70}
-                      >
-                        <Button
-                          variant="contained"
-                          disableElevation
-                          sx={{
-                            bgcolor: currentTheme.primary,
-                            px: 4,
-                            py: 1.5,
-                            borderRadius: "30px",
-                            color: "#0A192F",
-                            fontWeight: 600,
-                            position: "relative",
-                            overflow: "hidden",
-                            "&::after": {
-                              content: '""',
-                              position: "absolute",
-                              top: 0,
-                              left: "-100%",
-                              width: "200%",
-                              height: "100%",
-                              background: `linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)`,
-                              transition: "all 0.5s ease",
-                            },
-                            "&:hover": {
-                              bgcolor: currentTheme.primary,
-                              transform: "translateY(-3px)",
-                              boxShadow: `0 4px 20px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.5)`,
-                              "&::after": {
-                                left: "100%",
-                              },
-                            },
-                          }}
-                        >
-                          Contact Me
-                        </Button>
-                      </Link>
-                    </motion.div>
-
-                    <motion.div
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Link
-                        to="projects"
-                        smooth={true}
-                        duration={800}
-                        offset={-70}
-                      >
-                        <Button
-                          variant="outlined"
-                          sx={{
-                            borderColor: currentTheme.primary,
-                            color: currentTheme.primary,
-                            px: 4,
-                            py: 1.5,
-                            borderRadius: "30px",
-                            borderWidth: 2,
-                            fontWeight: 600,
-                            position: "relative",
-                            overflow: "hidden",
-                            transition: "all 0.3s ease",
-                            "&::before": {
-                              content: '""',
-                              position: "absolute",
-                              top: 0,
-                              left: 0,
-                              width: "100%",
-                              height: "100%",
-                              background: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0)`,
-                              transition: "all 0.3s ease",
-                              zIndex: -1,
-                            },
-                            "&:hover": {
-                              borderColor: currentTheme.primary,
-                              color: "#0A192F",
-                              "&::before": {
-                                background: currentTheme.primary,
-                              },
-                            },
-                          }}
-                        >
-                          View Projects
-                        </Button>
-                      </Link>
-                    </motion.div>
-                  </Box>
-                </ScrollAnimation>
-              </Box>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              md={5}
-              sx={{ display: { xs: "none", md: "block" } }}
-            >
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <motion.div
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  variants={imageVariants}
-                >
-                  <Box
-                    component="img"
-                    src={developerImageUrl}
-                    alt="Developer Profile"
-                    sx={{
-                      width: "100%",
-                      maxWidth: "380px",
-                      height: "auto",
-                      borderRadius: "20px",
-                      border: `3px solid ${currentTheme.primary}`,
-                      boxShadow: `0 5px 15px rgba(0,0,0,0.3)`,
-                    }}
-                  />
-                </motion.div>
-              </Box>
-            </Grid>
-          </Grid>
-
-          <ScrollAnimation animation="fade" delay={1.2}>
-            <Box
-              sx={{
-                position: "absolute",
-                bottom: { xs: 80, md: 120 },
-                left: "50%",
-                transform: "translateX(-50%)",
-                zIndex: 10,
-                display: { xs: "none", md: "none" },
-              }}
-            >
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 2,
-                  ease: "easeInOut",
+    <Box
+      id="hero"
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        position: "relative",
+        background: "linear-gradient(135deg, #0a192f 0%, #112240 100%)",
+        overflow: "hidden",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23${currentTheme.primary.slice(1)}' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          opacity: 0.5,
+          zIndex: 1,
+        },
+      }}
+    >
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, py: 4 }}>
+        <Grid container spacing={4} alignItems="center">
+          {/* Left Column - Content */}
+          <Grid item xs={12} md={7}>
+            <Fade in={true} timeout={800}>
+              <Typography
+                variant="overline"
+                sx={{
+                  color: currentTheme.primary,
+                  fontWeight: "bold",
+                  letterSpacing: "3px",
+                  display: "block",
+                  mb: 3,
+                  fontSize: "0.85rem",
+                  background: `linear-gradient(90deg, ${currentTheme.primary}, ${currentTheme.secondary})`,
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
                 }}
               >
-                <Box
+                ✨ Python and Web Developer
+              </Typography>
+            </Fade>
+
+            <motion.div
+              variants={typingVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <Typography
+                variant="h1"
+                sx={{
+                  background: `linear-gradient(135deg, #fff 0%, ${currentTheme.secondary} 100%)`,
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  fontWeight: 800,
+                  fontSize: { xs: "2.8rem", md: "4rem" },
+                  mb: 4,
+                  lineHeight: 1.1,
+                  whiteSpace: "normal",
+                  wordBreak: "break-word",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                <motion.span
+                  variants={letterVariants}
+                  style={{ display: "inline-block" }}
+                >
+                  {title}
+                </motion.span>
+              </Typography>
+            </motion.div>
+
+            <Fade in={true} timeout={1000}>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "text.secondary",
+                  mb: 6,
+                  fontSize: { xs: "1rem", md: "1.15rem" },
+                  maxWidth: "650px",
+                  lineHeight: 1.8,
+                  fontWeight: 400,
+                }}
+              >
+                A passionate Python developer and educator with expertise in
+                full-stack web development. I create innovative, scalable solutions and help students master
+                modern programming skills.
+              </Typography>
+            </Fade>
+
+            <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap', mb: 8 }}>
+              <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
+                <Button
+                  variant="contained"
+                  onClick={() => goTo('/contact')}
                   sx={{
-                    width: "30px",
-                    height: "50px",
-                    border: `2px solid ${currentTheme.primary}`,
-                    borderRadius: "20px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "flex-start",
-                    padding: "8px 0",
+                    px: 5,
+                    py: 2,
+                    fontSize: '1.05rem',
+                    borderRadius: '20px',
+                    background: `linear-gradient(135deg, ${currentTheme.primary}, ${currentTheme.secondary})`,
+                    color: '#0A192F',
+                    fontWeight: 700,
+                    textTransform: 'none',
+                    letterSpacing: '0.5px',
+                    boxShadow: `0 10px 30px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.5)`,
+                    position: 'relative',
+                    overflow: 'hidden',
+                    '&::before': {
+                      content: '""',
+                      position: 'absolute',
+                      top: 0,
+                      left: '-100%',
+                      width: '100%',
+                      height: '100%',
+                      background: 'rgba(255, 255, 255, 0.2)',
+                      transition: 'left 0.5s ease',
+                    },
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: `0 15px 40px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.7)`,
+                      '&::before': {
+                        left: '100%',
+                      }
+                    },
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                   }}
                 >
-                  <motion.div
-                    animate={{ y: [0, 12, 0] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 1.5,
-                      ease: "easeInOut",
-                    }}
-                    style={{
-                      width: "6px",
-                      height: "6px",
-                      borderRadius: "50%",
-                      backgroundColor: currentTheme.primary,
-                    }}
-                  />
-                </Box>
+                  Get In Touch
+                </Button>
+              </motion.div>
+              
+              <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }}>
+                <Button
+                  variant="outlined"
+                  startIcon={<DownloadIcon />}
+                  onClick={handleDownloadCV}
+                  sx={{
+                    px: 5,
+                    py: 2,
+                    fontSize: '1.05rem',
+                    borderRadius: '20px',
+                    borderColor: currentTheme.primary,
+                    color: 'text.primary',
+                    fontWeight: 600,
+                    textTransform: 'none',
+                    letterSpacing: '0.5px',
+                    borderWidth: '2px',
+                    background: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.08)`,
+                    '&:hover': {
+                      borderColor: currentTheme.primary,
+                      borderWidth: '2px',
+                      backgroundColor: `rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.15)`,
+                      transform: 'translateY(-4px)',
+                      boxShadow: `0 10px 30px rgba(${primaryRGB.r}, ${primaryRGB.g}, ${primaryRGB.b}, 0.3)`,
+                    },
+                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  }}
+                >
+                  Download CV
+                </Button>
               </motion.div>
             </Box>
-          </ScrollAnimation>
-        </Container>
-      </Box>
-    </Parallax>
+          </Grid>
+
+          {/* Right Column - Image */}
+          <Grid item xs={12} md={5} sx={{ display: { xs: "none", md: "block" } }}>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                whileHover="hover"
+                variants={imageVariants}
+              >
+                <Box
+                  component="img"
+                  src={developerImageUrl}
+                  alt="Developer Profile"
+                  sx={{
+                    width: "100%",
+                    maxWidth: "380px",
+                    height: "auto",
+                    borderRadius: "20px",
+                    border: `3px solid ${currentTheme.primary}`,
+                    boxShadow: `0 5px 15px rgba(0,0,0,0.3)`,
+                  }}
+                />
+              </motion.div>
+            </Box>
+          </Grid>
+        </Grid>
+
+        {/* Scroll Indicator */}
+        <Box sx={{ 
+          position: 'absolute', 
+          bottom: 40, 
+          left: '50%', 
+          transform: 'translateX(-50%)',
+          display: { xs: 'none', md: 'block' }
+        }}>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{
+              repeat: Infinity,
+              duration: 2,
+              ease: "easeInOut",
+            }}
+          >
+           
+          </motion.div>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 

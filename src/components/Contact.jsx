@@ -148,10 +148,14 @@ const Contact = () => {
               <Typography
                 variant="h3"
                 sx={{
-                  color: "text.primary",
+                  background: `linear-gradient(135deg, #fff 0%, #64ffda 100%)`,
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
                   mb: 5,
                   display: "inline-block",
                   position: "relative",
+                  fontWeight: 800,
                   "&::after": {
                     content: '""',
                     position: "absolute",
@@ -159,7 +163,7 @@ const Contact = () => {
                     left: 0,
                     width: "60px",
                     height: "4px",
-                    backgroundColor: "primary.main",
+                    background: `linear-gradient(90deg, #64ffda, #64ffda)`,
                   },
                 }}
               >
@@ -183,28 +187,33 @@ const Contact = () => {
             </motion.div>
 
             <Paper
-              elevation={3}
+              elevation={0}
               sx={{
                 p: 0,
-                background:
-                  "linear-gradient(145deg, rgba(17, 34, 64, 0.6), rgba(27, 44, 74, 0.8))",
-                borderRadius: "10px",
-                backdropFilter: "blur(10px)",
-                border: "1px solid rgba(100, 255, 218, 0.1)",
+                background: "linear-gradient(135deg, rgba(100, 255, 218, 0.1) 0%, rgba(100, 255, 218, 0.05) 100%)",
+                borderRadius: "24px",
+                backdropFilter: "blur(15px)",
+                border: "1.5px solid rgba(100, 255, 218, 0.25)",
                 overflow: "hidden",
+                boxShadow: '0 25px 50px -12px rgba(100, 255, 218, 0.2)',
               }}
             >
               <Grid container>
-                <Grid item xs={12} md={6} sx={{ p: { xs: 3, md: 5 } }}>
+                <Grid item xs={12} md={6} sx={{ p: { xs: 4, md: 6 } }}>
                   <motion.div variants={itemVariants}>
                     <Typography
-                      variant="h5"
+                      variant="h4"
                       sx={{
-                        color: "primary.main",
-                        mb: 3,
+                        background: `linear-gradient(90deg, #64ffda, #64ffda)`,
+                        backgroundClip: "text",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        mb: 4,
+                        fontWeight: 700,
+                        letterSpacing: '-0.5px'
                       }}
                     >
-                      Send Me a Message
+                      ✉️ Send Me a Message
                     </Typography>
                   </motion.div>
 
@@ -229,19 +238,27 @@ const Contact = () => {
                         sx={{
                           "& .MuiOutlinedInput-root": {
                             color: "white",
+                            backgroundColor: "rgba(100, 255, 218, 0.05)",
+                            borderRadius: "12px",
+                            transition: "all 0.3s ease",
                             "& fieldset": {
-                              borderColor: "secondary.main",
-                              borderRadius: "8px",
+                              borderColor: "rgba(100, 255, 218, 0.2)",
+                              borderWidth: "1.5px",
                             },
                             "&:hover fieldset": {
-                              borderColor: "primary.main",
+                              borderColor: "rgba(100, 255, 218, 0.4)",
+                              borderWidth: "1.5px",
+                            },
+                            "&.Mui-focused": {
+                              backgroundColor: "rgba(100, 255, 218, 0.08)",
                             },
                             "&.Mui-focused fieldset": {
                               borderColor: "primary.main",
+                              borderWidth: "1.5px",
                             },
                           },
                           "& .MuiInputLabel-root": {
-                            color: "secondary.main",
+                            color: "rgba(255, 255, 255, 0.6)",
                           },
                           "& .MuiInputLabel-root.Mui-focused": {
                             color: "primary.main",
@@ -263,19 +280,27 @@ const Contact = () => {
                         sx={{
                           "& .MuiOutlinedInput-root": {
                             color: "white",
+                            backgroundColor: "rgba(100, 255, 218, 0.05)",
+                            borderRadius: "12px",
+                            transition: "all 0.3s ease",
                             "& fieldset": {
-                              borderColor: "secondary.main",
-                              borderRadius: "8px",
+                              borderColor: "rgba(100, 255, 218, 0.2)",
+                              borderWidth: "1.5px",
                             },
                             "&:hover fieldset": {
-                              borderColor: "primary.main",
+                              borderColor: "rgba(100, 255, 218, 0.4)",
+                              borderWidth: "1.5px",
+                            },
+                            "&.Mui-focused": {
+                              backgroundColor: "rgba(100, 255, 218, 0.08)",
                             },
                             "&.Mui-focused fieldset": {
                               borderColor: "primary.main",
+                              borderWidth: "1.5px",
                             },
                           },
                           "& .MuiInputLabel-root": {
-                            color: "secondary.main",
+                            color: "rgba(255, 255, 255, 0.6)",
                           },
                           "& .MuiInputLabel-root.Mui-focused": {
                             color: "primary.main",
@@ -298,19 +323,27 @@ const Contact = () => {
                         sx={{
                           "& .MuiOutlinedInput-root": {
                             color: "white",
+                            backgroundColor: "rgba(100, 255, 218, 0.05)",
+                            borderRadius: "12px",
+                            transition: "all 0.3s ease",
                             "& fieldset": {
-                              borderColor: "secondary.main",
-                              borderRadius: "8px",
+                              borderColor: "rgba(100, 255, 218, 0.2)",
+                              borderWidth: "1.5px",
                             },
                             "&:hover fieldset": {
-                              borderColor: "primary.main",
+                              borderColor: "rgba(100, 255, 218, 0.4)",
+                              borderWidth: "1.5px",
+                            },
+                            "&.Mui-focused": {
+                              backgroundColor: "rgba(100, 255, 218, 0.08)",
                             },
                             "&.Mui-focused fieldset": {
                               borderColor: "primary.main",
+                              borderWidth: "1.5px",
                             },
                           },
                           "& .MuiInputLabel-root": {
-                            color: "secondary.main",
+                            color: "rgba(255, 255, 255, 0.6)",
                           },
                           "& .MuiInputLabel-root.Mui-focused": {
                             color: "primary.main",
@@ -331,15 +364,36 @@ const Contact = () => {
                         fullWidth
                         disabled={loading}
                         sx={{
-                          mt: 2,
-                          py: 1.5,
-                          color: "background.default",
-                          backgroundColor: "primary.main",
-                          borderRadius: "8px",
-                          fontWeight: 500,
-                          "&:hover": {
-                            backgroundColor: "primary.dark",
+                          mt: 4,
+                          py: 2,
+                          background: `linear-gradient(135deg, #64ffda, #64ffda)`,
+                          color: "#0A192F",
+                          borderRadius: "14px",
+                          fontWeight: 700,
+                          fontSize: '1rem',
+                          textTransform: 'none',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          "&::before": {
+                            content: '""',
+                            position: 'absolute',
+                            top: 0,
+                            left: '-100%',
+                            width: '100%',
+                            height: '100%',
+                            background: 'rgba(255, 255, 255, 0.2)',
+                            transition: 'left 0.5s ease',
                           },
+                          "&:hover": {
+                            transform: 'translateY(-3px)',
+                            boxShadow: `0 12px 30px rgba(100, 255, 218, 0.5)`,
+                            '&::before': {
+                              left: '100%',
+                            }
+                          },
+                          "&:disabled": {
+                            opacity: 0.7,
+                          }
                         }}
                       >
                         {loading ? "Sending..." : "Send Message"}
@@ -364,11 +418,15 @@ const Contact = () => {
                     <Typography
                       variant="h5"
                       sx={{
-                        color: "primary.main",
+                        background: `linear-gradient(90deg, #64ffda, #64ffda)`,
+                        backgroundClip: "text",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
                         mb: 4,
+                        fontWeight: 700,
                       }}
                     >
-                      Connect With Me
+                      🌐 Connect With Me
                     </Typography>
                   </motion.div>
 
@@ -404,16 +462,21 @@ const Contact = () => {
                         sx={{
                           justifyContent: "flex-start",
                           color: "primary.main",
-                          borderColor: "primary.main",
-                          borderRadius: "8px",
-                          py: 1.2,
+                          borderColor: "rgba(100, 255, 218, 0.4)",
+                          borderRadius: "12px",
+                          py: 1.5,
+                          borderWidth: "1.5px",
+                          backgroundColor: "rgba(100, 255, 218, 0.05)",
+                          transition: "all 0.3s ease",
                           "&:hover": {
-                            borderColor: "primary.light",
-                            backgroundColor: "rgba(100, 255, 218, 0.1)",
+                            borderColor: "primary.main",
+                            backgroundColor: "rgba(100, 255, 218, 0.12)",
+                            transform: "translateX(5px)",
+                            boxShadow: "0 6px 20px rgba(100, 255, 218, 0.2)",
                           },
                         }}
                       >
-                        mohammad243ahmadi@gmail.com
+                        📧 mohammad243ahmadi@gmail.com
                       </Button>
                     </motion.div>
                   </Box>
@@ -428,7 +491,7 @@ const Contact = () => {
                   >
                     <motion.div
                       variants={itemVariants}
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.08 }}
                     >
                       <Button
                         href="https://github.com/mohammad243ahmadi"
@@ -438,21 +501,27 @@ const Contact = () => {
                         sx={{
                           minWidth: "120px",
                           color: "primary.main",
-                          borderColor: "primary.main",
-                          borderRadius: "8px",
+                          borderColor: "rgba(100, 255, 218, 0.4)",
+                          borderRadius: "12px",
+                          borderWidth: "1.5px",
+                          backgroundColor: "rgba(100, 255, 218, 0.05)",
+                          transition: "all 0.3s ease",
+                          fontWeight: 600,
                           "&:hover": {
-                            borderColor: "primary.light",
-                            backgroundColor: "rgba(100, 255, 218, 0.1)",
+                            borderColor: "primary.main",
+                            backgroundColor: "rgba(100, 255, 218, 0.12)",
+                            transform: 'translateY(-3px)',
+                            boxShadow: "0 8px 20px rgba(100, 255, 218, 0.2)",
                           },
                         }}
                       >
-                        GitHub
+                        → GitHub
                       </Button>
                     </motion.div>
 
                     <motion.div
                       variants={itemVariants}
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.08 }}
                     >
                       <Button
                         href="https://www.instagram.com/mohammad.243ahmadi?utm_source=qr&igsh=MTBkZnFmbTAydTZoNg=="
@@ -462,21 +531,27 @@ const Contact = () => {
                         sx={{
                           minWidth: "120px",
                           color: "primary.main",
-                          borderColor: "primary.main",
-                          borderRadius: "8px",
+                          borderColor: "rgba(100, 255, 218, 0.4)",
+                          borderRadius: "12px",
+                          borderWidth: "1.5px",
+                          backgroundColor: "rgba(100, 255, 218, 0.05)",
+                          transition: "all 0.3s ease",
+                          fontWeight: 600,
                           "&:hover": {
-                            borderColor: "primary.light",
-                            backgroundColor: "rgba(100, 255, 218, 0.1)",
+                            borderColor: "primary.main",
+                            backgroundColor: "rgba(100, 255, 218, 0.12)",
+                            transform: 'translateY(-3px)',
+                            boxShadow: "0 8px 20px rgba(100, 255, 218, 0.2)",
                           },
                         }}
                       >
-                        Instagram
+                        → Instagram
                       </Button>
                     </motion.div>
 
                     <motion.div
                       variants={itemVariants}
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.08 }}
                     >
                       <Button
                         href="https://api.whatsapp.com/send?phone=+93785173338&text=Hello%20"
@@ -486,20 +561,26 @@ const Contact = () => {
                         sx={{
                           minWidth: "120px",
                           color: "primary.main",
-                          borderColor: "primary.main",
-                          borderRadius: "8px",
+                          borderColor: "rgba(100, 255, 218, 0.4)",
+                          borderRadius: "12px",
+                          borderWidth: "1.5px",
+                          backgroundColor: "rgba(100, 255, 218, 0.05)",
+                          transition: "all 0.3s ease",
+                          fontWeight: 600,
                           "&:hover": {
-                            borderColor: "primary.light",
-                            backgroundColor: "rgba(100, 255, 218, 0.1)",
+                            borderColor: "primary.main",
+                            backgroundColor: "rgba(100, 255, 218, 0.12)",
+                            transform: 'translateY(-3px)',
+                            boxShadow: "0 8px 20px rgba(100, 255, 218, 0.2)",
                           },
                         }}
                       >
-                        Whatsapp
+                        → Whatsapp
                       </Button>
                     </motion.div>
                     <motion.div
                       variants={itemVariants}
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.08 }}
                     >
                       <Button
                         href="https://www.facebook.com/mohammad.hah.96"
@@ -509,15 +590,21 @@ const Contact = () => {
                         sx={{
                           minWidth: "120px",
                           color: "primary.main",
-                          borderColor: "primary.main",
-                          borderRadius: "8px",
+                          borderColor: "rgba(100, 255, 218, 0.4)",
+                          borderRadius: "12px",
+                          borderWidth: "1.5px",
+                          backgroundColor: "rgba(100, 255, 218, 0.05)",
+                          transition: "all 0.3s ease",
+                          fontWeight: 600,
                           "&:hover": {
-                            borderColor: "primary.light",
-                            backgroundColor: "rgba(100, 255, 218, 0.1)",
+                            borderColor: "primary.main",
+                            backgroundColor: "rgba(100, 255, 218, 0.12)",
+                            transform: 'translateY(-3px)',
+                            boxShadow: "0 8px 20px rgba(100, 255, 218, 0.2)",
                           },
                         }}
                       >
-                        FaceBook
+                        → Facebook
                       </Button>
                     </motion.div>
                   </Box>
