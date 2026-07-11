@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Typography,
@@ -65,7 +65,6 @@ const projects = [
 
 const Projects = () => {
   const { currentTheme } = useCustomTheme();
-  const [hoveredProject, setHoveredProject] = useState(null);
 
   // Placeholder projects section image
   const projectsImageUrl =
@@ -213,8 +212,6 @@ const Projects = () => {
                     variants={cardVariants}
                     whileHover="hover"
                     whileTap="tap"
-                    onHoverStart={() => setHoveredProject(project.title)}
-                    onHoverEnd={() => setHoveredProject(null)}
                   >
                     <Paper
                       elevation={0}

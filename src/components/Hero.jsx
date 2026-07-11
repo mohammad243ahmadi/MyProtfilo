@@ -10,9 +10,7 @@ const Hero = () => {
   const { currentTheme } = useCustomTheme();
   const navigate = useNavigate();
 
-  // Developer profile image - replace with your actual image path
-  const developerImageUrl =
-    "https://images.unsplash.com/photo-1604964432806-254d07c11f32?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGV2ZWxvcGVyfGVufDB8fDB8fHww";
+  const developerImageUrl = `${process.env.PUBLIC_URL}/images/profile.jpg`;
 
   // Derive RGB values for the theme color
   const primaryRGB = {

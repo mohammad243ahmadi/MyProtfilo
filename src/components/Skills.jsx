@@ -5,7 +5,6 @@ import {
   Grid,
   Paper,
   Container,
-  LinearProgress,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { Parallax } from "react-parallax";
