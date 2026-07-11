@@ -52,6 +52,15 @@ const projects = [
         live: "https://safir-foundation.org",
         image: "https://plus.unsplash.com/premium_vector-1720082660197-b1a163e1372a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Q291cnNlfGVufDB8fDB8fHww",
     },
+    {
+        title: "students management app for schools and training centers",
+        description:
+            "A comprehensive desktop application (offline) for managing schools, training centers, and educational institutions.",
+        technologies: ["Python", "PySide6", "Sqlite 3", "Pandas", "Inno Setup 6"],
+        github: "#",
+        live: "Offline",
+        image: `${process.env.PUBLIC_URL}/images/student-management-dashboard.png`,
+    },
 ];
 
 const Projects = () => {

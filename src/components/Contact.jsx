@@ -52,15 +52,23 @@ const Contact = () => {
     const serviceId = "service_s648v8q";
     const templateId = "template_yjsotxy";
     const userId = "wBbAChWzwh8V6pXIg";
+    const senderName = formData.name.trim();
+    const senderEmail = formData.email.trim();
+    const senderMessage = formData.message.trim();
 
     emailjs
       .send(
         serviceId,
         templateId,
         {
-          from_name: formData.name,
-          reply_to: formData.email,
-          message: formData.message,
+          name: senderName,
+          email: senderEmail,
+          from_name: senderName,
+          from_email: senderEmail,
+          user_name: senderName,
+          user_email: senderEmail,
+          reply_to: senderEmail,
+          message: senderMessage,
         },
         userId
       )
